@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import PhonesList from './components/PhonesList';
+import PhoneDetails from './components/PhoneDetails';
 
 function App() {
   const [phones, setPhones] = useState([]);
+  const [specificPhone, setSpecificPhone] = useState('');
+
   useEffect(() => {
     const fetchedPhones = async () => {
       try {
@@ -17,12 +21,8 @@ function App() {
   }, []);
   return (
     <div>
-      <h1>Home Page</h1>
-      <ul>
-        {phones.map((phone) => (
-          <li key={phone.id}>{phone.name}</li>
-        ))}
-      </ul>
+      <PhonesList phones={phones} setSelectedPhone={setSpecificPhone} />
+      <PhoneDetails specificPhone={specificPhone} />
     </div>
   );
 }
